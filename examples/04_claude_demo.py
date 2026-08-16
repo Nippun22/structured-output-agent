@@ -22,7 +22,7 @@ def main():
     # Check for ANTHROPIC_API_KEY
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
-        print("\n ⚠️ ANTHROPIC_API_KEY environment variable is not set!")
+        print("\n [WARNING] ANTHROPIC_API_KEY environment variable is not set!")
         print("Please set your API key in PowerShell before running:")
         print("   $env:ANTHROPIC_API_KEY=\"sk-ant-your-key-here\"\n")
         return
