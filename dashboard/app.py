@@ -54,11 +54,13 @@ st.markdown('<div class="main-header">🛡️ Structured Output Agent Studio</di
 st.markdown('<div class="sub-header">Guaranteed Pydantic JSON Schema Validation, Auto-Repair Retry Loops & Telemetry for LLMs</div>', unsafe_allow_html=True)
 
 # Sidebar Configuration
+from structured_agent.providers.claude_provider import ClaudeLLMProvider
+
 st.sidebar.header("⚙️ Agent & Provider Configuration")
 
 provider_choice = st.sidebar.selectbox(
     "LLM Provider",
-    ["Mock LLM (Fault Injection Demo)", "Google Gemini API", "OpenAI API"]
+    ["Mock LLM (Fault Injection Demo)", "Anthropic Claude API", "Google Gemini API", "OpenAI API"]
 )
 
 if provider_choice == "Mock LLM (Fault Injection Demo)":
@@ -76,6 +78,12 @@ if provider_choice == "Mock LLM (Fault Injection Demo)":
         "score": 96.5
     }
     provider = MockLLMProvider(fault_mode=fault_mode, valid_data=valid_data_preset)
+elif provider_choice == "Anthropic Claude API":
+    claude_key = st.sidebar.text_input("Anthropic Claude API Key", type="password", value=os.environ.get("ANTHROPIC_API_KEY", ""))
+    claude_model = st.sidebar.text_input("Claude Model", value="claude-3-5-sonnet-20241022")
+    if not claude_key:
+        st.sidebar.warning("Please enter your ANTHROPIC_API_KEY to run live calls.")
+    provider = ClaudeLLMProvider(model_name=claude_model, api_key=claude_key)
 elif provider_choice == "Google Gemini API":
     gemini_key = st.sidebar.text_input("Gemini API Key", type="password", value=os.environ.get("GEMINI_API_KEY", ""))
     gemini_model = st.sidebar.text_input("Gemini Model", value="gemini-2.5-flash")
