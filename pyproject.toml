@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "structured_output_agent"
+version = "0.1.0"
+description = "Enterprise-Grade Self-Correcting Structured Output Agent with Pydantic Schema Validation"
+authors = [{ name = "AI Engineering Student" }]
+dependencies = [
+    "pydantic>=2.5.0",
+    "rich>=13.0.0",
+    "streamlit>=1.30.0",
+    "pytest>=7.4.0",
+    "google-genai>=0.1.1",
+    "openai>=1.10.0",
+    "requests>=2.31.0"
+]
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
